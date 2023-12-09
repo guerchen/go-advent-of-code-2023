@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -50,11 +50,18 @@ func main() {
 	input := string(dat)
 	games_list := strings.Split(input, "\n")
 
-	sum_games := 0
+	sum_cards := 0
+	num_cards := make(map[int]int)
+	for i := 1; i <= len(games_list); i++ {
+		num_cards[i] = 1
+	}
 
 	for _, element := range games_list {
 
 		game_info := strings.Split(element, ": ")
+		game_num := strings.Fields(game_info[0])[1]
+		_game_num, err := strconv.Atoi(game_num)
+		check(err)
 
 		numbers := strings.Split(game_info[1], " | ")
 
@@ -66,12 +73,14 @@ func main() {
 
 		inter := winning_set.intersection(owned_set)
 		points := len(inter)
-		if points > 0 {
-			score := math.Pow(2, float64(points-1))
-			sum_games += int(score)
+
+		for i := _game_num + 1; i <= _game_num+points; i++ {
+			num_cards[i] += 1 * num_cards[_game_num]
 		}
+
+		sum_cards += num_cards[_game_num]
 
 	}
 	fmt.Println("Result is:")
-	fmt.Println(sum_games)
+	fmt.Println(sum_cards)
 }
