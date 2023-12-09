@@ -1,4 +1,4 @@
-//I couldn't solve day 3. My solution work on test dataset, but didn't on real input. Can't figure why. Movingo to day 4.
+//I couldn't solve day 3. My solution works on test dataset, but didn't on real input. Can't figure why. Moving to day 4.
 
 package main
 
